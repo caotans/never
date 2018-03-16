@@ -1,0 +1,738 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >-->
+<!--<mapper namespace="com.bigdata.fxzcbx.dao.BondTradeDataMapper" >-->
+<!--<resultMap id="bondTradeDataMap" type="com.bigdata.fxzcbx.model.BondTradeData">-->
+  <!--<id property="id" column="id" />-->
+  <!--<result property="dep_name" column="dep_name"/>-->
+  <!--<result property="inv_sname" column="inv_sname"/>-->
+  <!--<result property="pro_id" column="pro_id"/>-->
+  <!--<result property="group_code" column="group_code"/>-->
+  <!--<result property="trader" column="trader"/>-->
+  <!--<result property="trade_date" column="trade_date"/>-->
+  <!--<result property="settlement_date" column="settlement_date"/>-->
+  <!--<result property="trade_id" column="trade_id"/>-->
+  <!--<result property="code_type" column="code_type"/>-->
+  <!--<result property="code_orig" column="code_orig"/>-->
+  <!--<result property="bond_code" column="bond_code"/>-->
+  <!--<result property="bond_name" column="bond_name"/>-->
+  <!--<result property="trade" column="trade"/>-->
+  <!--<result property="bond_count" column="bond_count"/>-->
+  <!--<result property="trade_money" column="trade_money"/>-->
+  <!--<result property="net_price" column="net_price"/>-->
+  <!--<result property="full_price" column="full_price"/>-->
+  <!--<result property="l_ytm" column="l_ytm"/>-->
+  <!--<result property="net_total" column="net_total"/>-->
+  <!--<result property="full_total" column="full_total"/>-->
+  <!--<result property="trade_market" column="trade_market"/>-->
+  <!--<result property="remark" column="remark"/>-->
+  <!--<result property="maturity_date" column="maturity_date"/>-->
+  <!--<result property="coupon" column="coupon"/>-->
+  <!--<result property="coupon_date" column="coupon_date"/>-->
+  <!--<result property="frequency" column="frequency"/>-->
+  <!--<result property="upload_group" column="upload_group"/>-->
+  <!--<result property="version_date" column="version_date"/>-->
+  <!--<result property="author" column="author"/>-->
+  <!--<result property="ent_time" column="ent_time"/>-->
+  <!--<result property="upd_time" column="upd_time"/>-->
+  <!--<result property="dt_status" column="dt_status"/>-->
+  <!--<result property="ct_status" column="ct_status"/>-->
+  <!--<result property="sm_status" column="sm_status"/>-->
+  <!--<result property="log" column="log"/>-->
+  <!--<result property="iscomment" column="iscomment"/>-->
+  <!--<result property="upload_log_id" column="upload_log_id"/>-->
+<!--</resultMap>-->
+<!--<sql id="select">-->
+ <!--C.id,C.dep_name,C.inv_sname,C.pro_id,C.group_code,C.trader, to_char(C.trade_date,'yyyy/MM/dd') as trade_date,-->
+ <!--to_char(C.settlement_date,'yyyy/MM/dd') as settlement_date ,C.trade_id,C.code_type,C.code_orig,C.bond_code,C.bond_name,C.trade,-->
+ <!--C.bond_count,C.trade_money,C.net_price,C.full_price,C.l_ytm,C.net_total,full_total,-->
+ <!--C.trade_market,C.remark,C.maturity_date,C.coupon,C.coupon_date,C.frequency,C.upload_group,C.version_date,-->
+ <!--C.author,C.ent_time,C.upd_time,C.dt_status,C.ct_status,C.sm_status,C.log,C.iscomment,C.upload_log_id-->
+<!--</sql>-->
+<!--<sql id="selectAll">-->
+ <!--C.id,C.dep_name,C.inv_sname,C.pro_id,C.group_code,C.trader, to_char(C.trade_date,'yyyy/MM/dd') as trade_date,-->
+ <!--to_char(C.settlement_date,'yyyy/MM/dd') as settlement_date ,C.trade_id,C.code_type,C.code_orig,C.bond_code,C.bond_name,C.trade,-->
+ <!--C.bond_count,C.trade_money,C.net_price,C.full_price,C.l_ytm,C.net_total,full_total,-->
+ <!--trim(to_char(ROUND(C.net_price,3),'9999999999990.000')) as s_net_price,trim(to_char(ROUND(C.full_price,3),'9999999999990.000')) as s_full_price,-->
+ <!--trim(to_char(ROUND(C.net_total,2),'9999999999999999999990.00')) as s_net_total,trim(to_char(ROUND(C.full_total,2),'9999999999999999999990.00')) as s_full_total,-->
+ <!--C.trade_market,C.remark,C.maturity_date,C.coupon,C.coupon_date,C.frequency,C.upload_group,to_char(C.version_date,'yyyy-MM-dd') as version_date,-->
+ <!--C.author,C.ent_time,C.upd_time,C.dt_status,C.ct_status,C.sm_status,C.log,C.iscomment,C.upload_log_id,S.rolename as upload_group_name,d.upload_type-->
+<!--</sql>-->
+
+<!--<sql id="selectRd">-->
+ <!--C.id,C.dep_name,C.inv_sname,C.pro_id,C.group_code,C.trader, to_char(C.trade_date,'yyyy/MM/dd') as trade_date,-->
+ <!--to_char(C.settlement_date,'yyyy/MM/dd') as settlement_date ,C.trade_id,C.code_type,C.code_orig,C.bond_code,C.bond_name,C.trade,-->
+ <!--C.bond_count,C.trade_money,C.net_price,C.full_price,C.l_ytm,C.net_total,full_total,-->
+ <!--to_char(ROUND(C.net_price,3),'9999999999990.000') as s_net_price,to_char(ROUND(C.full_price,3),'9999999999990.000') as s_full_price,-->
+ <!--to_char(ROUND(C.net_total,2),'9999999999999999999990.00') as s_net_total,to_char(ROUND(C.full_total,2),'9999999999999999999990.00') as s_full_total,-->
+ <!--C.trade_market,C.remark,C.maturity_date,C.coupon,C.coupon_date,C.frequency,C.upload_group,C.version_date,-->
+ <!--C.author,C.ent_time,C.upd_time,C.dt_status,C.ct_status,C.sm_status,C.log,C.iscomment,C.upload_log_id-->
+<!--</sql>-->
+
+
+    <!--&lt;!&ndash;根据id查询债券信息&ndash;&gt;-->
+    <!--<select id="getBondTradeDataById"  resultMap="bondTradeDataMap"  parameterType="String">-->
+        <!--SELECT  *  FROM KM_BOND_TRADE_DATA c  where c.id=#{id,jdbcType=VARCHAR}-->
+    <!--</select>-->
+
+
+<!--<insert id="insertSelective" parameterType="com.bigdata.fxzcbx.model.BondTradeData">-->
+    <!--insert into KM_BOND_TRADE_DATA-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--id,-->
+      <!--</if>-->
+     <!--<if test="dep_name != null">-->
+        <!--dep_name,-->
+      <!--</if>-->
+      <!--<if test="inv_sname != null">-->
+        <!--inv_sname,-->
+      <!--</if>-->
+       <!--<if test="pro_id != null">-->
+        <!--pro_id,-->
+      <!--</if>-->
+        <!--<if test="pro_id != null">-->
+        <!--pro_id,-->
+      <!--</if>-->
+      <!--<if test="group_code != null">-->
+        <!--group_code,-->
+      <!--</if>-->
+      <!--<if test="trader != null">-->
+        <!--trader,-->
+      <!--</if>-->
+      <!--<if test="trade_date != null">-->
+        <!--trade_date,-->
+      <!--</if>-->
+      <!--<if test="settlement_date != null">-->
+        <!--settlement_date,-->
+      <!--</if>-->
+       <!--<if test="trade_id != null">-->
+        <!--trade_id,-->
+      <!--</if>-->
+       <!--<if test="code_type != null">-->
+        <!--code_type,-->
+      <!--</if>-->
+      <!--<if test="code_orig != null">-->
+        <!--code_orig,-->
+      <!--</if>-->
+      <!--<if test="bond_code != null">-->
+        <!--bond_code,-->
+      <!--</if>-->
+       <!--<if test="bond_name != null">-->
+        <!--bond_name,-->
+      <!--</if>-->
+        <!--<if test="trade != null">-->
+        <!--trade,-->
+      <!--</if>-->
+       <!--<if test="bond_count != null">-->
+        <!--bond_count,-->
+      <!--</if>-->
+       <!--<if test="trade_money != null">-->
+        <!--trade_money,-->
+      <!--</if>-->
+      <!--<if test="net_price != null">-->
+        <!--net_price,-->
+      <!--</if>-->
+      <!--<if test="full_price != null">-->
+        <!--full_price,-->
+      <!--</if>-->
+      <!--<if test="l_ytm != null">-->
+        <!--l_ytm,-->
+      <!--</if>-->
+      <!--<if test="net_total != null">-->
+        <!--net_total,-->
+      <!--</if>-->
+      <!--<if test="full_total != null">-->
+        <!--full_total,-->
+      <!--</if>-->
+       <!--<if test="trade_market != null">-->
+        <!--trade_market,-->
+      <!--</if>-->
+      <!--<if test="remark != null">-->
+        <!--remark,-->
+      <!--</if>-->
+       <!--<if test="maturity_date != null">-->
+        <!--maturity_date,-->
+      <!--</if>-->
+      <!--<if test="coupon != null">-->
+        <!--coupon,-->
+      <!--</if>-->
+       <!--<if test="coupon_date != null">-->
+        <!--coupon_date,-->
+      <!--</if>-->
+        <!--<if test="frequency != null">-->
+        <!--frequency,-->
+      <!--</if>-->
+       <!--<if test="upload_group != null">-->
+        <!--upload_group,-->
+      <!--</if>-->
+       <!--<if test="version_date != null">-->
+        <!--version_date,-->
+      <!--</if>-->
+      <!--<if test="author != null">-->
+        <!--author,-->
+      <!--</if>-->
+      <!--<if test="ent_time != null">-->
+        <!--ent_time,-->
+      <!--</if>-->
+      <!--<if test="upd_time != null">-->
+        <!--upd_time,-->
+      <!--</if>-->
+       <!--<if test="dt_status != null">-->
+        <!--dt_status,-->
+      <!--</if>-->
+      <!--<if test="ct_status != null">-->
+        <!--ct_status,-->
+      <!--</if>-->
+      <!--<if test="sm_status != null">-->
+          <!--sm_status,-->
+       <!--</if>-->
+      <!--<if test="log != null">-->
+        <!--log,-->
+      <!--</if>-->
+      <!--<if test="iscomment != null">-->
+        <!--iscomment,-->
+      <!--</if>-->
+      <!--<if test="upload_log_id != null">-->
+        <!--upload_log_id-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--#{id,jdbcType=VARCHAR},-->
+      <!--</if>    -->
+      <!--<if test="dep_name != null">-->
+        <!--#{dep_name,jdbcType=VARCHAR},-->
+      <!--</if> -->
+      <!--<if test="inv_sname != null">-->
+        <!--#{inv_sname,jdbcType=VARCHAR},-->
+      <!--</if> -->
+      <!--<if test="pro_id != null">-->
+        <!--#{pro_id,jdbcType=VARCHAR},-->
+      <!--</if> -->
+       <!--<if test="group_code != null">-->
+        <!--#{group_code,jdbcType=VARCHAR},-->
+      <!--</if> -->
+      <!--<if test="trader != null">-->
+        <!--#{trader,jdbcType=VARCHAR},-->
+      <!--</if>         -->
+      <!--<if test="trade_date != null">-->
+         <!--to_date(#{trade_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+      <!--</if>-->
+     <!--<if test="settlement_date != null">-->
+         <!--to_date(#{settlement_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+      <!--</if>-->
+      <!--<if test="trade_id != null">-->
+        <!--#{trade_id,jdbcType=VARCHAR},-->
+      <!--</if>   -->
+      <!--<if test="code_type != null">-->
+        <!--#{code_type,jdbcType=VARCHAR},-->
+      <!--</if> -->
+       <!--<if test="code_orig != null">-->
+        <!--#{code_orig,jdbcType=VARCHAR},-->
+      <!--</if> -->
+       <!--<if test="bond_code != null">-->
+        <!--#{bond_code,jdbcType=VARCHAR},-->
+      <!--</if> -->
+      <!--<if test="bond_name != null">-->
+        <!--#{bond_name,jdbcType=VARCHAR},-->
+      <!--</if> -->
+      <!--<if test="trade != null">-->
+        <!--#{trade,jdbcType=VARCHAR},-->
+      <!--</if> -->
+       <!--<if test="bond_count != null">-->
+        <!--#{bond_count,jdbcType=VARCHAR},-->
+      <!--</if> -->
+      <!--<if test="trade_money != null">-->
+        <!--#{trade_money,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="net_price != null">-->
+        <!--#{net_price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="full_price != null">-->
+        <!--#{full_price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="l_ytm != null">-->
+        <!--#{l_ytm,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="net_total != null">-->
+        <!--#{net_total,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="full_total != null">-->
+        <!--#{full_total,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="trade_market != null">-->
+        <!--#{trade_market,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="remark != null">-->
+        <!--#{remark,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="maturity_date != null">-->
+         <!--to_date(#{maturity_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+      <!--</if>-->
+      <!--<if test="coupon != null">-->
+        <!--#{coupon,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="coupon_date != null">-->
+         <!--to_date(#{coupon_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+      <!--</if>-->
+      <!--<if test="frequency != null">-->
+        <!--#{frequency,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="upload_group != null">-->
+        <!--#{upload_group,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="version_date != null">-->
+         <!--to_date(#{version_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+      <!--</if>-->
+       <!--<if test="author != null">-->
+        <!--#{author,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="ent_time != null">-->
+        <!--#{ent_time,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="upd_time != null">-->
+        <!--#{upd_time,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+        <!--<if test="dt_status != null">-->
+        <!--#{dt_status,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ct_status != null">-->
+        <!--#{ct_status,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sm_status != null">-->
+         <!--#{sm_status,jdbcType=VARCHAR},-->
+       <!--</if>-->
+       <!--<if test="log != null">-->
+        <!--#{log,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="iscomment != null">-->
+        <!--#{iscomment,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="upload_log_id != null">-->
+        <!--#{upload_log_id,jdbcType=VARCHAR},-->
+      <!--</if>-->
+ <!--</trim>-->
+<!--</insert>-->
+
+    <!--&lt;!&ndash; 批量插入 &ndash;&gt;-->
+    <!--<insert id ="insertBondTradeDataBatch" parameterType="java.util.List" >-->
+
+        <!--insert into KM_BOND_TRADE_DATA-->
+        <!--(-->
+        <!--id,-->
+        <!--dep_name,-->
+        <!--inv_sname,-->
+        <!--pro_id,-->
+        <!--group_code,-->
+        <!--trader,-->
+        <!--trade_date,-->
+        <!--settlement_date,-->
+        <!--trade_id,-->
+        <!--code_type,-->
+        <!--code_orig,-->
+        <!--bond_code,-->
+        <!--bond_name,-->
+        <!--trade,-->
+        <!--bond_count,-->
+        <!--trade_money,-->
+        <!--net_price,-->
+        <!--full_price,-->
+        <!--l_ytm,-->
+        <!--net_total,-->
+        <!--full_total,-->
+        <!--trade_market,-->
+        <!--remark,-->
+        <!--maturity_date,-->
+        <!--coupon,-->
+        <!--coupon_date,-->
+        <!--frequency,-->
+        <!--upload_group,-->
+        <!--version_date,-->
+        <!--author,-->
+        <!--ent_time,-->
+        <!--upd_time,-->
+        <!--dt_status,-->
+        <!--ct_status,-->
+        <!--sm_status,-->
+        <!--log,-->
+        <!--iscomment,-->
+        <!--upload_log_id-->
+        <!--)-->
+
+        <!--<foreach collection="list" item="bondTradeData" index="index"  separator="UNION ALL">-->
+
+            <!--SELECT-->
+            <!--#{bondTradeData.id,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.dep_name,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.inv_sname,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.pro_id,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.group_code,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.trader,jdbcType=VARCHAR},-->
+            <!--to_date(#{bondTradeData.trade_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+            <!--to_date(#{bondTradeData.settlement_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+            <!--#{bondTradeData.trade_id,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.code_type,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.code_orig,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.bond_code,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.bond_name,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.trade,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.bond_count,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.trade_money,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.net_price,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.full_price,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.l_ytm,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.net_total,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.full_total,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.trade_market,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.remark,jdbcType=VARCHAR},-->
+            <!--to_date(#{bondTradeData.maturity_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+            <!--#{bondTradeData.coupon,jdbcType=VARCHAR},-->
+            <!--to_date(#{bondTradeData.coupon_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+            <!--#{bondTradeData.frequency,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.upload_group,jdbcType=VARCHAR},-->
+            <!--to_date(#{bondTradeData.version_date,jdbcType=VARCHAR},'yyyy-MM-dd'),-->
+            <!--#{bondTradeData.author,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.ent_time,jdbcType=TIMESTAMP},-->
+            <!--#{bondTradeData.upd_time,jdbcType=TIMESTAMP},-->
+            <!--#{bondTradeData.dt_status,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.ct_status,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.sm_status,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.log,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.iscomment,jdbcType=VARCHAR},-->
+            <!--#{bondTradeData.upload_log_id,jdbcType=VARCHAR}-->
+            <!--FROM DUAL-->
+
+        <!--</foreach >-->
+
+    <!--</insert >-->
+  <!---->
+ <!--<update id="updateBondTradeDate"  parameterType="com.bigdata.fxzcbx.model.BondTradeData">-->
+      <!--UPDATE KM_BOND_TRADE_DATA-->
+      <!--<trim prefix="set" suffixOverrides=",">-->
+       <!--<if test="dep_name != null">-->
+        <!--dep_name=#{dep_name,jdbcType=VARCHAR},-->
+      <!--</if>     -->
+      <!--<if test="inv_sname != null">-->
+        <!--inv_sname=#{inv_sname,jdbcType=VARCHAR},-->
+      <!--</if>  -->
+      <!--<if test="pro_id != null">-->
+         <!--pro_id=#{pro_id,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="group_code != null">-->
+         <!--group_code=#{group_code,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="trader != null">-->
+         <!--trader=#{trader,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="trade_date != null">-->
+         <!--trade_date=to_date(substr(#{trade_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+      <!--</if>-->
+      <!--<if test="settlement_date != null">-->
+         <!--settlement_date=to_date(substr(#{settlement_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+      <!--</if>-->
+       <!--<if test="trade_id != null">-->
+         <!--trade_id=#{trade_id,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="code_type != null">-->
+         <!--code_type=#{code_type,jdbcType=VARCHAR},-->
+      <!--</if>-->
+        <!--<if test="code_orig != null">-->
+         <!--code_orig=#{code_orig,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="bond_code != null">-->
+         <!--bond_code=#{bond_code,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="bond_name != null">-->
+         <!--bond_name=#{bond_name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="trade != null">-->
+         <!--trade=#{trade,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="bond_count != null">-->
+         <!--bond_count=#{bond_count,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="trade_money != null">-->
+         <!--trade_money= #{trade_money,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="net_price != null">-->
+         <!--net_price=#{net_price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="full_price != null">-->
+        <!--full_price=#{full_price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="l_ytm != null">-->
+        <!--l_ytm=#{l_ytm,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="net_total != null">-->
+        <!--net_total=#{net_total,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="full_total != null">-->
+        <!--full_total=#{full_total,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--<if test="trade_market != null">-->
+        <!--trade_market=#{trade_market,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="maturity_date != null">-->
+        <!--maturity_date=to_date(substr(#{maturity_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+      <!--</if>-->
+      <!--<if test="coupon != null">-->
+         <!--coupon=#{coupon,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="coupon_date != null">-->
+         <!--coupon_date=to_date(substr(#{coupon_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+      <!--</if>-->
+       <!--<if test="frequency != null">-->
+         <!--frequency=#{frequency,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="remark != null">-->
+         <!--remark=#{remark,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="upload_group != null">-->
+          <!--upload_group=#{upload_group,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="author != null">-->
+         <!--author=#{author,jdbcType=VARCHAR},-->
+      <!--</if>-->
+       <!--&lt;!&ndash;<if test="ent_time != null">&ndash;&gt;-->
+         <!--&lt;!&ndash;ent_time=#{ent_time,jdbcType=TIMESTAMP},&ndash;&gt;-->
+      <!--&lt;!&ndash;</if>&ndash;&gt;-->
+       <!--<if test="upd_time != null">-->
+         <!--upd_time=#{upd_time,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="dt_status != null">-->
+         <!--dt_status=#{dt_status,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ct_status != null">-->
+          <!--ct_status=#{ct_status,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sm_status != null">-->
+          <!--sm_status=#{sm_status,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="iscomment != null">-->
+         <!--iscomment=#{iscomment,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="upload_log_id != null">-->
+        <!--upload_log_id=#{upload_log_id,jdbcType=DATE}-->
+      <!--</if>-->
+      <!--</trim>-->
+       <!--WHERE  id=#{id,jdbcType=VARCHAR}     and  dt_status!='2'-->
+<!--</update>-->
+
+
+    <!--&lt;!&ndash; 批量修改 &ndash;&gt;-->
+    <!--<update id="updateBondTradeDataBatch" parameterType="java.util.List">-->
+        <!--begin-->
+        <!--<foreach collection="list" item="item" index="index" separator=";" >-->
+            <!--update KM_BOND_TRADE_DATA-->
+            <!--<set>-->
+                <!--<if test="item.dep_name != null and item.dep_name!=''">-->
+                    <!--dep_name=#{item.dep_name,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.inv_sname != null">-->
+                    <!--inv_sname=#{item.inv_sname,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.pro_id != null">-->
+                    <!--pro_id=#{item.pro_id,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.group_code != null">-->
+                    <!--group_code=#{item.group_code,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.trader != null">-->
+                    <!--trader=#{item.trader,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.trade_date != null">-->
+                    <!--trade_date=to_date(substr(#{item.trade_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+                <!--</if>-->
+                <!--<if test="item.settlement_date != null">-->
+                    <!--settlement_date=to_date(substr(#{item.settlement_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+                <!--</if>-->
+                <!--<if test="item.trade_id != null">-->
+                    <!--trade_id=#{item.trade_id,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.code_type != null">-->
+                    <!--code_type=#{item.code_type,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.code_orig != null">-->
+                    <!--code_orig=#{item.code_orig,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.bond_code != null">-->
+                    <!--bond_code=#{item.bond_code,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.bond_name != null">-->
+                    <!--bond_name=#{item.bond_name,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.trade != null">-->
+                    <!--trade=#{item.trade,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.bond_count != null">-->
+                    <!--bond_count=#{item.bond_count,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.trade_money != null">-->
+                    <!--trade_money= #{item.trade_money,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.net_price != null">-->
+                    <!--net_price=#{item.net_price,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.full_price != null">-->
+                    <!--full_price=#{item.full_price,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.l_ytm != null">-->
+                    <!--l_ytm=#{item.l_ytm,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.net_total != null">-->
+                    <!--net_total=#{item.net_total,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.full_total != null">-->
+                    <!--full_total=#{item.full_total,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.trade_market != null">-->
+                    <!--trade_market=#{item.trade_market,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.maturity_date != null">-->
+                    <!--maturity_date=to_date(substr(#{item.maturity_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+                <!--</if>-->
+                <!--<if test="item.coupon != null">-->
+                    <!--coupon=#{item.coupon,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.coupon_date != null">-->
+                    <!--coupon_date=to_date(substr(#{item.coupon_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd'),-->
+                <!--</if>-->
+                <!--<if test="item.frequency != null">-->
+                    <!--frequency=#{item.frequency,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.remark != null">-->
+                    <!--remark=#{item.remark,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.author != null">-->
+                    <!--author=#{item.author,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.ent_time != null">-->
+                    <!--ent_time=#{item.ent_time,jdbcType=TIMESTAMP},-->
+                <!--</if>-->
+                <!--<if test="item.upd_time != null">-->
+                    <!--upd_time=#{item.upd_time,jdbcType=TIMESTAMP},-->
+                <!--</if>-->
+                <!--<if test="item.dt_status != null">-->
+                    <!--dt_status=#{item.dt_status,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.ct_status != null">-->
+                    <!--ct_status=#{item.ct_status,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.sm_status != null">-->
+                    <!--sm_status=#{item.sm_status,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.iscomment != null">-->
+                    <!--iscomment=#{item.iscomment,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <!--<if test="item.upload_log_id != null">-->
+                    <!--upload_log_id=#{item.upload_log_id,jdbcType=DATE}-->
+                <!--</if>-->
+
+            <!--</set>-->
+            <!--WHERE  id=#{item.id,jdbcType=VARCHAR}     and  dt_status!='2'-->
+        <!--</foreach>-->
+        <!--;end;-->
+    <!--</update>-->
+
+
+<!--<select id="selectFileId"  resultMap="bondTradeDataMap"  parameterType="String">-->
+   <!--SELECT  <include refid="select"/> FROM km_bond_trade_data C where-->
+      <!--C.upload_log_id=#{upload_log_id,jdbcType=VARCHAR}-->
+      <!--and C.dt_status!='2' order by c.code_orig,c.trade,c.trade_date,abs(c.bond_count)-->
+<!--</select>-->
+
+
+    <!--<update id="deleteBondTradeDate" parameterType="com.bigdata.fxzcbx.model.BondTradeData">-->
+            <!--update km_bond_trade_data-->
+             <!--set  dt_status='2',ct_status='0',upd_time=#{upd_time,jdbcType=TIMESTAMP}-->
+          <!--where upload_log_id = #{upload_log_id,jdbcType=VARCHAR} -->
+    <!--</update>-->
+
+
+    <!--<update id="deleteBondTradeDateById" parameterType="java.lang.String">-->
+            <!--update km_bond_trade_data-->
+             <!--set  dt_status='2',upd_time=sysdate-->
+          <!--where id = #{id,jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+    <!--&lt;!&ndash;批量删除，将DT_STATUS置为2&ndash;&gt;-->
+    <!--<update id="deleteBondTradeDataBatch" parameterType="java.util.List">-->
+        <!--begin-->
+        <!--<foreach collection="list" item="item" index="index" separator=";" >-->
+            <!--update KM_BOND_TRADE_DATA-->
+            <!--<set>-->
+                <!--<if test="item.dt_status!=null and item.dt_status!=''">-->
+                    <!--dt_status=#{item.dt_status,jdbcType=VARCHAR},-->
+                <!--</if>-->
+
+                <!--<if test="item.upd_time!=null and item.upd_time!=''">-->
+                    <!--upd_time=#{item.upd_time,jdbcType=TIMESTAMP}-->
+                <!--</if>-->
+
+            <!--</set>-->
+            <!--WHERE  id=#{item.id,jdbcType=VARCHAR}-->
+        <!--</foreach>-->
+        <!--;end;-->
+    <!--</update>-->
+
+
+  <!--<select id="selectbondBycodeorgiAndup" parameterType="java.util.HashMap" resultMap="bondTradeDataMap">-->
+        <!--select * from km_bond_trade_data where  UPLOAD_GROUP=#{UPLOAD_GROUP,jdbcType=VARCHAR} and CODE_ORIG=#{CODE_ORIG,jdbcType=VARCHAR}-->
+  <!--</select>-->
+
+    <!--<select id="getBondCount" parameterType="String" resultType="java.lang.Integer">-->
+        <!--select count(1) from km_bond_trade_data A WHERE A.UPLOAD_LOG_ID=#{upload_log_id} AND A.DT_STATUS!='2'-->
+    <!--</select>-->
+    <!--<select id="selectByUploadid" parameterType="java.util.HashMap" resultMap="bondTradeDataMap">-->
+        <!--select * from-->
+        <!--(-->
+        <!--select rownum no,a.* from-->
+        <!--(-->
+        <!--select <include refid="selectRd"/> from km_bond_trade_data C WHERE C.UPLOAD_LOG_ID=#{upload_log_id} AND C.DT_STATUS!='2'-->
+        <!--ORDER BY C.iscomment desc,C.code_orig-->
+        <!--) a-->
+        <!--)-->
+        <!--where-->
+        <!--#{endIndex} >= no-->
+        <!--and-->
+        <!--no > #{startIndex}-->
+    <!--</select>-->
+
+    <!--<select id="selectById"  resultMap="bondTradeDataMap"  parameterType="String">-->
+        <!--SELECT  <include refid="selectAll"/>  FROM km_bond_trade_data C-->
+            <!--join sysrole s on s.id=C.upload_group-->
+            <!--join km_upload_file_log d on c.upload_log_id=d.l_id-->
+            <!--where C.ID=#{id}-->
+    <!--</select>-->
+
+    <!--<update id="updateBondData"  parameterType="java.util.HashMap">-->
+
+        <!--UPDATE km_bond_trade_data  SET-->
+        <!--<if test="upd_time != null">-->
+            <!--upd_time=#{upd_time,jdbcType=TIMESTAMP},-->
+        <!--</if>-->
+        <!--<if test="dt_status != null">-->
+            <!--dt_status=#{dt_status,jdbcType=VARCHAR},-->
+        <!--</if>-->
+        <!--<if test="ct_status != null">-->
+            <!--ct_status=#{ct_status,jdbcType=VARCHAR},-->
+        <!--</if>-->
+        <!--<if test="sm_status != null">-->
+            <!--sm_status=#{sm_status,jdbcType=VARCHAR},-->
+        <!--</if>-->
+        <!--<if test="iscomment != null">-->
+            <!--iscomment=#{iscomment,jdbcType=VARCHAR}-->
+        <!--</if>-->
+        <!--WHERE dt_status!='2'-->
+        <!--and code_orig=#{code_orig,jdbcType=VARCHAR}-->
+        <!--and trade_date>=to_date(substr(#{min_trade_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd')-->
+        <!--<if test="max_trade_date != null">-->
+        <!--<![CDATA[-->
+          <!--and trade_date<to_date(substr(#{max_trade_date,jdbcType=VARCHAR},1,10),'yyyy-MM-dd')-->
+        <!--]]>-->
+        <!--</if>-->
+    <!--</update>-->
+
+
+
+<!--</mapper>-->

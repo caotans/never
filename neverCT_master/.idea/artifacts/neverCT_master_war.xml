@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="neverCT_master:war">
+    <output-path>$PROJECT_DIR$/../../neverCT/neverCT_master/target</output-path>
+    <root id="archive" name="chache_web.war">
+      <element id="artifact" artifact-name="neverCT_master:war exploded" />
+    </root>
+  </artifact>
+</component>
